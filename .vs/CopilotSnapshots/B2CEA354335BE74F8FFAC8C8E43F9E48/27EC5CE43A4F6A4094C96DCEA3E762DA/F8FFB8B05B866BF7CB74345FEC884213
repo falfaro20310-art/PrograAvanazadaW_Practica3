@@ -1,13 +1,16 @@
-using Practica3_API.Data;
+﻿using Practica3_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
 // Dapper: registra el repositorio para que se pueda inyectar en los controladores
 builder.Services.AddScoped<IComprasRepository, ComprasRepository>();
 
+// CORS: permite que el proyecto Web (Persona B) consuma esta API desde otro puerto
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirWeb", policy =>
@@ -19,6 +22,12 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.UseHttpsRedirection();
 
