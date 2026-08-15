@@ -1,0 +1,65 @@
+﻿@model Practica3_Grupo2.Models.RegistroViewModel
+
+@{
+    ViewData["Title"] = "Registro de Abono";
+}
+
+<div class="consulta-card">
+
+    <div class="d-flex justify-content-center gap-3 mb-4">
+        <h2 class="fw-bold text-primary mb-0">Registro de Abono</h2>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    <form asp-controller="Registro" asp-action="Registro" method="post" class="w-100">
+
+        <div class="mb-3">
+            <label asp-for="CodigoCompra" class="form-label fw-semibold">
+                <i class="bi bi-bag-check text-primary"></i> Compra
+            </label>
+            <select asp-for="CodigoCompra" id="CodigoCompra" class="form-select registro-input">
+                <option value="">Seleccione una compra</option>
+                @foreach (var compra in Model.ComprasPendientes)
+                {
+                    <option value="@compra.CodigoCompra">
+                        @compra.Descripcion (Saldo: @compra.Saldo.ToString("C2"))
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="CodigoCompra" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SaldoAnterior" class="form-label fw-semibold">
+                <i class="bi bi-wallet2 text-primary"></i> Saldo Anterior
+            </label>
+            <input asp-for="SaldoAnterior" id="SaldoAnterior" class="form-control registro-input" readonly />
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Abono" class="form-label fw-semibold">
+                <i class="bi bi-cash text-primary"></i> Abono
+            </label>
+            <input asp-for="Abono" id="Abono" class="form-control registro-input" />
+            <span asp-validation-for="Abono" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-check-circle"></i> Abonar
+        </button>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/registro.js"></script>
+}

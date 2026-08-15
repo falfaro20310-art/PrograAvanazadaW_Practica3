@@ -1,8 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-banner hero-full-bleed p-5 mb-4 text-center">
+    <span class="badge rounded-pill bg-primary-subtle text-primary-emphasis px-3 py-2 mb-3">
+        Bienvenido
+    </span>
+
+    <h1 class="display-5 fw-bold text-white mb-0">
+        ¡Bienvenido al<br />Sistema de Abonos!
+    </h1>
 </div>
+
+<div class="text-center mb-5">
+    <p class="fs-5 text-secondary mb-4">
+        <span class="fw-bold">¿Qué gestión desea realizar?</span>
+    </p>
+        <div class="d-flex justify-content-center gap-4">
+            <a asp-controller="Consulta" asp-action="Consulta" class="action-card">
+            <i class="bi bi-eye-fill action-card-icon"></i>
+                <span class="action-card-text">Consultar mis abonos</span>
+            </a>
+
+            <a asp-controller="Registro" asp-action="Registro" class="action-card">
+            <i class="bi bi-calculator action-card-icon"></i>
+                <span class="action-card-text">Registrar un abono</span>
+            </a>
+        </div>
+    </div>
+

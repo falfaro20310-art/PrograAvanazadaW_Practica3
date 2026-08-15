@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "Practica3_API\\Practica3_API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Practica3_Grupo2\\Practica3_Grupo2.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

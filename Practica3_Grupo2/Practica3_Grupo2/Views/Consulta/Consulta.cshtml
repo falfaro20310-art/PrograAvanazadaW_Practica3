@@ -1,0 +1,60 @@
+﻿@model List<Practica3_Grupo2.Models.CompraViewModel>
+
+@{
+    ViewData["Title"] = "Consulta de Productos";
+}
+
+<div class="consulta-card">
+
+    <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+        <h2 class="fw-bold text-primary mb-0">Consulta de Productos</h2>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table consulta-table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-hash"></i> Código</th>
+                    <th><i class="bi bi-file-text"></i> Descripción</th>
+                    <th><i class="bi bi-tag"></i> Precio</th>
+                    <th><i class="bi bi-wallet2"></i> Saldo</th>
+                    <th><i class="bi bi-clock-history"></i> Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var compra in Model)
+                {
+                    <tr>
+                        <td><span class="codigo-badge">@compra.CodigoCompra</span></td>
+                        <td>@compra.Descripcion</td>
+                        <td>@compra.Precio.ToString("C2")</td>
+                        <td>@compra.Saldo.ToString("C2")</td>
+                        <td>
+                            @if (compra.Estado == "Pendiente")
+                            {
+                                <span class="badge estado-pendiente"><i class="bi bi-clock"></i> @compra.Estado</span>
+                            }
+                            else
+                            {
+                                <span class="badge estado-cancelado"><i class="bi bi-check-circle"></i> @compra.Estado</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No hay productos para mostrar.</p>
+    }
+
+</div>
