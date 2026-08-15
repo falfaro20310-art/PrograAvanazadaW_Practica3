@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="Practica3_API/Practica3_API.csproj" />
+  <Project Path="Practica3_Grupo2/Practica3_Grupo2.csproj" />
+</Solution>
