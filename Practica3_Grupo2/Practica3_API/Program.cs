@@ -5,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Dapper: registra el repositorio para que se pueda inyectar en los controladores
 builder.Services.AddScoped<IComprasRepository, ComprasRepository>();
 
 builder.Services.AddCors(options =>

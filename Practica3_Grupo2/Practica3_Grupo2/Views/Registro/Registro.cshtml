@@ -1,4 +1,49 @@
-﻿@page
-@model Practica3_Grupo2.Views.Registro.RegistroModel
+﻿@model Practica3_Grupo2.Models.RegistroViewModel
+
 @{
+    ViewData["Title"] = "Registro de Abono";
+}
+
+<h2>Registro de Abono</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+}
+
+<form asp-controller="Registro" asp-action="Registro" method="post" class="col-md-6">
+
+    <div class="mb-3">
+        <label asp-for="CodigoCompra" class="form-label">Compra</label>
+        <select asp-for="CodigoCompra" id="CodigoCompra" class="form-select">
+            <option value="">-- Seleccione una compra --</option>
+            @foreach (var compra in Model.ComprasPendientes)
+            {
+                <option value="@compra.CodigoCompra">
+                    @compra.Descripcion (Saldo: @compra.Saldo.ToString("C2"))
+                </option>
+            }
+        </select>
+        <span asp-validation-for="CodigoCompra" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SaldoAnterior" class="form-label">Saldo Anterior</label>
+        <input asp-for="SaldoAnterior" id="SaldoAnterior" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Abono" class="form-label">Abono</label>
+        <input asp-for="Abono" id="Abono" class="form-control" />
+        <span asp-validation-for="Abono" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Abonar</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/registro.js"></script>
 }
